@@ -1,0 +1,19 @@
+{
+  "name": "actions",
+  "version": "0.0.0",
+  "description": "A monorepo for GitHub actions",
+  "main": "index.js",
+  "repository": "https://github.com/saschazar21/actions",
+  "author": "Sascha Zarhuber <saschazar21@yahoo.de> (https://sascha.work)",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "postinstall": "lerna bootstrap"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
