@@ -1,4 +1,16 @@
-FROM buildkite/puppeteer
+FROM node:lts-alpine AS builder
 
 WORKDIR /src
-COPY lib /src/
+
+RUN npm i yargs
+
+### --------------------- ###
+
+FROM buildkite/puppeteer
+
+RUN npm i -g serve
+
+COPY src /src
+COPY --from=builder /src /src
+
+ENTRYPOINT [ "node", "/src/index.js" ]

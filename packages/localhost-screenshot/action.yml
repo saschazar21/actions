@@ -1,0 +1,37 @@
+name: 'Localhost Screenshot'
+description: 'Create screenshots from your static website'
+author: saschazar21
+branding:
+  color: 'blue'
+  icon: 'camera'
+
+inputs:
+  dark:
+    default: 'false'
+    description: 'Apply dark mode (run with @media (prefers-color-scheme: dark))'
+    required: false
+  devices:
+    description: 'List of devices to emulate within Chrome (see: https://bit.ly/3n0EmMe), default: standard 1440x900 viewport'
+    required: false
+  dist:
+    default: './dist'
+    description: 'Relative path pointing to the website distribution folder'
+    required: false
+  name:
+    default: 'screenshot'
+    description: 'Screenshot file name prefix'
+    required: false
+  url:
+    default: '/'
+    description: 'URL path of the website to create a screenshot from'
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - --dark ${{ inputs.dark }}
+    - --devices ${{ inputs.devices }}
+    - --dist ${{ inputs.dist }}
+    - --name ${{ inputs.name }}
+    - --url ${{ inputs.url }}

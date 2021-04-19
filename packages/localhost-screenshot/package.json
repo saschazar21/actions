@@ -4,18 +4,21 @@
   "description": "Create screenshots from a static website",
   "author": "Sascha Zarhuber <saschazar21@yahoo.de> (https://sascha.work)",
   "license": "MIT",
-  "main": "lib/localhost-screenshot.js",
+  "main": "src/index.js",
   "directories": {
-    "lib": "lib",
+    "src": "src",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "src"
   ],
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "peerDependencies": {
+  "devDependencies": {
     "puppeteer": "^8.0.0"
+  },
+  "dependencies": {
+    "yargs": "^16.2.0"
   }
 }
