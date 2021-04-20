@@ -1,6 +1,7 @@
-/* eslint-disable no-console */
 const { spawn } = require('child_process');
 const { join } = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const debug = require('debug')('localhost-screenshot');
 
 const HOST_REGEX = /(http:\/\/localhost:\d{2,5})$/i;
 // eslint-disable-next-line prefer-destructuring
@@ -14,7 +15,7 @@ const init = async ({ dist }) =>
 
     proc.stdout.on('data', (data) => {
       const d = data.toString().trim();
-      console.log(d);
+      debug(d);
 
       if (isReturned) {
         return;
@@ -27,7 +28,7 @@ const init = async ({ dist }) =>
     });
 
     proc.stderr.on('data', (data) => {
-      console.error(data.toString());
+      debug(data.toString());
 
       if (isReturned) {
         return;
@@ -37,7 +38,7 @@ const init = async ({ dist }) =>
       reject(data);
     });
 
-    proc.on('exit', () => console.log('Server exited.'));
+    proc.on('exit', () => debug('Server exited.'));
   });
 
 module.exports = init;

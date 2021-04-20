@@ -1,8 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const fs = require('fs');
 const fetch = require('node-fetch');
-
-// jest.mock('fs', () => require('memfs').fs);
+const { join } = require('path');
 
 const TMP = '/memfs';
 const DIST_DIR = './dist';
@@ -55,7 +54,25 @@ describe('Localhost Screenshot', () => {
     await screenshot({ ...DEFAULT_OPTIONS, baseUrl: host });
 
     expect(
-      fs.readFileSync('/memfs/screenshot_1440x900.png', null),
+      fs.readFileSync(join(TMP, 'screenshot_1440x900.png'), null),
+    ).toBeTruthy();
+  });
+
+  it('takes screenshot using custom options', async () => {
+    await screenshot({
+      ...DEFAULT_OPTIONS,
+      dark: true,
+      devices: ['iPhone 11', 'iPad'],
+      baseUrl: host,
+      name: 'screen',
+    });
+
+    expect(
+      fs.readFileSync(join(TMP, 'screen_414x828_dark.png'), null),
+    ).toBeTruthy();
+
+    expect(
+      fs.readFileSync(join(TMP, 'screen_768x1024_dark.png'), null),
     ).toBeTruthy();
   });
 });

@@ -1,6 +1,7 @@
-/* eslint-disable no-console */
 const { join } = require('path');
 const { URL } = require('url');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const debug = require('debug')('localhost-screenshot');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const puppeteer = require('puppeteer');
 
@@ -23,8 +24,16 @@ const init = async () => {
     defaultViewport: { height, width },
   });
 
-  console.log(
-    `\n################\n# Chromium version: ${await browser.version()}\n################\n\n`,
+  const version = `Browser version: ${await browser.version()}`;
+  const fill = String().padStart(version.length + 6, '#');
+  debug(
+    `\n#${fill}#\n#${String('#').padStart(
+      fill.length + 1,
+      ' ',
+    )}\n#   ${version}   #\n#${String('#').padStart(
+      fill.length + 1,
+      ' ',
+    )}\n#${fill}#\n\n`,
   );
 
   return browser;
@@ -34,7 +43,7 @@ const capture = async ({
   baseUrl,
   browser,
   dark,
-  device,
+  device = 'default',
   name: prefix = 'screenshot',
   url: urlPath = '/',
 }) => {
@@ -49,6 +58,10 @@ const capture = async ({
   const path = join(PUBLIC_PATH, name);
   const url = new URL(urlPath, baseUrl);
 
+  debug(
+    `Capturing URL: "${url}" w/ device: "${device}" (viewport ${width}x${height})...`,
+  );
+
   const page = await browser.newPage();
   if (isCustomDevice) {
     await page.emulate(puppeteer.devices[device]);
@@ -61,6 +74,8 @@ const capture = async ({
 
   await page.goto(url);
   await page.screenshot({ path });
+
+  debug(`DONE! Saved screenshot to ${path}`);
 };
 
 const setup = async (options) => {
@@ -68,6 +83,14 @@ const setup = async (options) => {
     Array.isArray(options.devices) && options.devices.length > 0
       ? options.devices.map((device) => ({ ...options, device }))
       : [{ ...options }];
+
+  debug(
+    `Expecting ${
+      runs.length
+    } screenshot(s) in total using the following device presets: ${runs
+      .map(({ device = 'default' }) => device)
+      .join(', ')}.`,
+  );
 
   return init().then((browser) =>
     Promise.all(

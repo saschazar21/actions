@@ -16,6 +16,7 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
+    "debug": "^4.3.1",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.2.0",

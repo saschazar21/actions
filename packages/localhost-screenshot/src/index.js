@@ -1,3 +1,4 @@
+const debug = require('debug')('localhost-screenshot');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
@@ -34,6 +35,9 @@ const { argv } = yargs(hideBin(process.argv))
   });
 
 const options = { ...argv };
+
+debug(`---------\n-\n- configuration options: \n-\n---------\n`);
+debug(options);
 
 server({ ...options }).then(([proc, baseUrl]) =>
   screenshot({ ...options, baseUrl }).then(() => proc.kill()),
