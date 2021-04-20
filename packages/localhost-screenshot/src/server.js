@@ -4,7 +4,7 @@ const { join } = require('path');
 
 const HOST_REGEX = /(http:\/\/localhost:\d{2,5})$/i;
 // eslint-disable-next-line prefer-destructuring
-const WORKDIR_PATH = process.env.RUNNER_WORKSPACE;
+const WORKDIR_PATH = process.env.GITHUB_WORKSPACE;
 
 const init = async ({ dist }) =>
   new Promise((resolve, reject) => {

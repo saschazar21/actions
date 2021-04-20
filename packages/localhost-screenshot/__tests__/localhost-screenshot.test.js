@@ -12,8 +12,8 @@ jest.mock('fs', () => require('memfs').vol);
 
 describe('Localhost Screenshot', () => {
   beforeAll(() => {
-    process.env.RUNNER_TEMP = TMP;
-    process.env.RUNNER_WORKSPACE = WORKDIR;
+    process.env.HOME = TMP;
+    process.env.GITHUB_WORKSPACE = WORKDIR;
 
     const files = {
       './index.html': INDEX_HTML,

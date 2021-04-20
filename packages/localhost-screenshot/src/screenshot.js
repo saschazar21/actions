@@ -4,7 +4,7 @@ const { URL } = require('url');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const puppeteer = require('puppeteer');
 
-const PUBLIC_PATH = process.env.RUNNER_TEMP;
+const PUBLIC_PATH = process.env.HOME;
 // Puppeteer device descriptors: https://github.com/puppeteer/puppeteer/blob/main/src/common/DeviceDescriptors.ts
 const DEFAULT_VIEWPORT = [1440, 900];
 
