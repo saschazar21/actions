@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+const rimraf = require('rimraf');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const { join } = require('path');
@@ -35,6 +36,13 @@ describe('Localhost Screenshot', () => {
 
   afterAll(() => proc.kill());
 
+  afterEach(
+    async () =>
+      new Promise((resolve, reject) =>
+        rimraf(`${TMP}/**.png`, (err) => (err ? reject(err) : resolve())),
+      ),
+  );
+
   beforeAll(async () => {
     const s = await server({ dist: './' });
     host = s[1];
@@ -58,6 +66,18 @@ describe('Localhost Screenshot', () => {
     ).toBeTruthy();
   });
 
+  it('takes screenshot when missing options', async () => {
+    expect(() =>
+      fs.readFileSync(join(TMP, 'screenshot_1440x900.png'), null),
+    ).toThrow();
+
+    await screenshot({ baseUrl: host });
+
+    expect(
+      fs.readFileSync(join(TMP, 'screenshot_1440x900.png'), null),
+    ).toBeTruthy();
+  });
+
   it('takes screenshot using custom options', async () => {
     await screenshot({
       ...DEFAULT_OPTIONS,
@@ -65,6 +85,7 @@ describe('Localhost Screenshot', () => {
       devices: ['iPhone 11', 'iPad'],
       baseUrl: host,
       name: 'screen',
+      url: '/localhost-screenshot.test.js',
     });
 
     expect(
