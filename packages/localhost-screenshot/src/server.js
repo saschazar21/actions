@@ -10,8 +10,11 @@ const WORKDIR_PATH = process.env.GITHUB_WORKSPACE;
 const init = async ({ dist }) =>
   new Promise((resolve, reject) => {
     let isReturned = false;
+    const serverRoot = join(WORKDIR_PATH, dist);
 
-    const proc = spawn('serve', [join(WORKDIR_PATH, dist)]);
+    debug(`Serving files from: ${serverRoot}`);
+
+    const proc = spawn('serve', [serverRoot]);
 
     proc.stdout.on('data', (data) => {
       const d = data.toString().trim();
