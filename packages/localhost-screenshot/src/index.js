@@ -36,7 +36,10 @@ const { argv } = yargs(hideBin(process.argv))
 
 const options = { ...argv };
 
-debug(`---------\n-\n- configuration options: \n-\n---------\n`);
+const str = 'Configuration options:';
+const fill = String().padStart(str.length + 6, '-');
+const blank = String().padStart(fill.length, ' ');
+debug(`\n-${fill}-\n-${blank}-\n-   ${str}   -\n-${blank}-\n-${fill}-\n\n`);
 debug(options);
 
 server({ ...options }).then(([proc, baseUrl]) =>
