@@ -30,8 +30,8 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - --dark ${{ inputs.dark }}
-    - --devices ${{ inputs.devices }}
-    - --dist ${{ inputs.dist }}
-    - --name ${{ inputs.name }}
-    - --url ${{ inputs.url }}
+    - --dark=${{ inputs.dark }}
+    - --devices=${{ inputs.devices }}
+    - --dist=${{ inputs.dist }}
+    - --name=${{ inputs.name }}
+    - --url=${{ inputs.url }}
