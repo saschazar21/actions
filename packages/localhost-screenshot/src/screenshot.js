@@ -79,9 +79,14 @@ const capture = async ({
 };
 
 const setup = async (options) => {
+  const devices =
+    options?.devices && options.devices.length > 0
+      ? options.devices.split(',').map((device) => device.trim())
+      : [];
+
   const runs =
-    Array.isArray(options.devices) && options.devices.length > 0
-      ? options.devices.map((device) => ({ ...options, device }))
+    devices.length > 0
+      ? devices.map((device) => ({ ...options, device }))
       : [{ ...options }];
 
   debug(

@@ -12,9 +12,9 @@ const { argv } = yargs(hideBin(process.argv))
       'Apply dark mode (run with @media (prefers-color-scheme: dark))',
   })
   .option('devices', {
-    type: 'array',
+    type: 'string',
     description:
-      'List of devices to emulate within Chrome (see: https://bit.ly/3n0EmMe), default: standard 1440x900 viewport',
+      'Comma-separated string of devices to emulate within Chrome (see: https://bit.ly/3n0EmMe), default: standard 1440x900 viewport',
   })
   .option('dist', {
     type: 'string',

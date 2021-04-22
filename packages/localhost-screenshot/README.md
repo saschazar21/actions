@@ -12,7 +12,7 @@ Apply dark mode (run with @media (prefers-color-scheme: dark)). Default: `false`
 
 ### `devices`
 
-List of devices to emulate within Chrome (see: [Puppeteer DeviceDescriptors](https://bit.ly/3n0EmMe)) - to also include the default viewport, add an invalid device descriptor, e.g. `desktop`, Default: standard 1440x900 viewport.
+Comma-separated string of devices to emulate within Chrome (see: [Puppeteer DeviceDescriptors](https://bit.ly/3n0EmMe)) - to also include the default viewport, add an invalid device descriptor, e.g. `desktop`, Default: standard 1440x900 viewport.
 
 ### `dist`
 

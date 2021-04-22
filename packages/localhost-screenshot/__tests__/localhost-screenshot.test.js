@@ -82,7 +82,7 @@ describe('Localhost Screenshot', () => {
     await screenshot({
       ...DEFAULT_OPTIONS,
       dark: true,
-      devices: ['iPhone 11', 'iPad'],
+      devices: 'iPhone 11, iPad',
       baseUrl: host,
       name: 'screen',
       url: '/localhost-screenshot.test.js',

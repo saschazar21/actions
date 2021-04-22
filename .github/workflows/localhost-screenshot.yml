@@ -22,10 +22,11 @@ jobs:
           DEBUG: localhost-screenshot
         with:
           dark: true
-          devices: 'iPhone 11, iPad, desktop'
+          devices: iPhone 11, iPad, desktop
           dist: './packages/localhost-screenshot/__tests__'
 
-      - run: ls -lha $HOME
+      - name: Screenshot output
+        run: ls -lha /home/runner/work/_temp/_github_home/
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v2
