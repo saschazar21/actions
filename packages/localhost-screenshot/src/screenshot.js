@@ -80,7 +80,7 @@ const capture = async ({
 
 const setup = async (options) => {
   const devices =
-    options?.devices && options.devices.length > 0
+    options && options.devices && options.devices.length > 0
       ? options.devices.split(',').map((device) => device.trim())
       : [];
 
