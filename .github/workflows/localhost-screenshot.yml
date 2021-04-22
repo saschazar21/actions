@@ -1,0 +1,35 @@
+name: localhost-screenshot
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Print environment variables
+        run: |
+          echo "CWD - `pwd`"
+          echo "HOME - $HOME"
+          echo "GITHUB_WORKSPACE - $GITHUB_WORKSPACE"
+
+      - name: Test action
+        uses: ./packages/localhost-screenshot
+        env:
+          DEBUG: localhost-screenshot
+        with:
+          dark: true
+          devices: '"iPhone 11", "iPad", "desktop"'
+          dist: ./packages/localhost-screenshot/__tests__
+
+      - run: ls -lha $HOME
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshots
+          path: ${{ env.home }}/**.png
+          retention-days: 1
