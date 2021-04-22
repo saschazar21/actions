@@ -22,7 +22,7 @@ jobs:
           DEBUG: localhost-screenshot
         with:
           dark: true
-          devices: '"iPhone 11", "iPad", "desktop"'
+          devices: 'iPhone 11, iPad, desktop'
           dist: './packages/localhost-screenshot/__tests__'
 
       - run: ls -lha $HOME
