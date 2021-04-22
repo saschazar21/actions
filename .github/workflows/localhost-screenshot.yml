@@ -23,7 +23,7 @@ jobs:
         with:
           dark: true
           devices: '"iPhone 11", "iPad", "desktop"'
-          dist: ./packages/localhost-screenshot/__tests__
+          dist: './packages/localhost-screenshot/__tests__'
 
       - run: ls -lha $HOME
 
@@ -31,5 +31,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: screenshots
-          path: ${{ env.home }}/**.png
+          path: /home/runner/work/_temp/_github_home/**.png
           retention-days: 1

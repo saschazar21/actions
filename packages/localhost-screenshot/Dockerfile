@@ -2,7 +2,7 @@ FROM node:lts-alpine AS builder
 
 WORKDIR /src
 
-RUN npm i debug yargs
+RUN npm i --save-dev debug yargs
 
 ### --------------------- ###
 
