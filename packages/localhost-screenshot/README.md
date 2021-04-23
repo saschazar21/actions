@@ -1,7 +1,9 @@
 [![localhost-screenshot](https://github.com/saschazar21/actions/actions/workflows/localhost-screenshot.yml/badge.svg)](https://github.com/saschazar21/actions/actions/workflows/localhost-screenshot.yml)
 
 <div align="center">
-  <h1><img alt="Icon showing a camera" href="https://raw.githubusercontent.com/feathericons/feather/0dc2bf5/icons/camera.svg" style="display: inline-block; padding: 0.25em; border-radius: 9999px; background-color: #74b5fd;" /><span>Localhost Screenshot</span></h1>
+  <h1>📸 Localhost Screenshot</h1>
+  <br />
+  <br />
 </div>
 
 > A [GitHub Action](https://docs.github.com/en/actions) for creating automated screenshots of a static website for various viewports
