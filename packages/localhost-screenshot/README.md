@@ -44,7 +44,7 @@ with:
   url: /about
 ```
 
-The example configuration above will set `_build` as website root, create 3 screenshots from the website's `/about` page based on the viewport of the listed devices (requesting the website's dark mode, should it support automatic detection), and store the results in the directory set as `$HOME` environment variable (e.g. `/home/runner/work/_temp/_github_home` - see the [environment variables section](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables) in the GitHub docs).
+The example configuration above will set `_build` as website root, create 3 screenshots from the website's `/about` page based on the viewport of the listed devices (requesting the website's dark mode, should it support automatic detection), and store the results in the [output directory](#output-files).
 
 ### Demo workflow
 
