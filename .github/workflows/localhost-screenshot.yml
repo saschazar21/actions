@@ -4,7 +4,9 @@ on: push
 
 jobs:
   changes:
+    name: Detect changes for localhost-screenshot
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
 
     outputs:
       changed: ${{ steps.filter.outputs.changed }}
@@ -22,6 +24,7 @@ jobs:
               - 'packages/localhost-screenshot/**'
 
   test:
+    name: Test GitHub Actions workflow
     needs: changes
     runs-on: ubuntu-latest
     if: ${{ needs.changes.outputs.changed == 'true' }}
