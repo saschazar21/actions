@@ -12,25 +12,13 @@
 
 All listed inputs below are **optional** and therefore should merely support in customizing the workflow run. If omitted, an automatic fallback to the default values is provided.
 
-### `dark`
-
-Apply dark mode (run with @media (prefers-color-scheme: dark)). Default: `false`.
-
-### `devices`
-
-Comma-separated string of devices to emulate within Chrome (see: [Puppeteer DeviceDescriptors](https://bit.ly/3n0EmMe)) - to also include the default viewport, add an invalid device descriptor, e.g. `desktop`, Default: standard 1440x900 viewport.
-
-### `dist`
-
-Relative path pointing to the website distribution folder. Default: `"./dist"`.
-
-### `name`
-
-Screenshot file name prefix to use. Screenshot filenames are a combination of _prefix_, _viewport_ and _dark_ (e.g. `[name]_[width]x[height]_dark.png`, when `dark` input equals `true`, otherwise dark suffix is omitted). Default: `"screenshot"`.
-
-### `url`
-
-URL path of the website to create a screenshot from. Default: `"/"` (website root)
+| input     | description                                                                                                                                                                                                                | required | default                    |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------: | -------------------------- |
+| `dark`    | Apply dark mode (run with @media (prefers-color-scheme: dark))                                                                                                                                                             |       no | `false`                    |
+| `devices` | Comma-separated string of devices to emulate within Chrome (see: [Puppeteer DeviceDescriptors](https://bit.ly/3n0EmMe)) - to also include the default viewport, add an invalid device descriptor, e.g. `desktop`           |       no | standard 1440x900 viewport |
+| `dist`    | Relative path pointing to the website distribution folder                                                                                                                                                                  |       no | `"./dist"`                 |
+| `name`    | Screenshot file name prefix to use. Screenshot filenames are a combination of _prefix_, _viewport_ and _dark_ (e.g. `[name]_[width]x[height]_dark.png`, when `dark` input equals `true`, otherwise dark suffix is omitted) |       no | `"screenshot"`             |
+| `url`     | URL path of the website to create a screenshot from                                                                                                                                                                        |       no | `"/"`                      |
 
 ## Example usage
 
