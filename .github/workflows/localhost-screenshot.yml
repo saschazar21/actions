@@ -5,8 +5,10 @@ on: push
 jobs:
   changes:
     runs-on: ubuntu-latest
+
     outputs:
       changed: ${{ steps.filter.outputs.changed }}
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -25,6 +27,9 @@ jobs:
     if: ${{ needs.changes.outputs.changed == 'true' }}
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
       - name: Print environment variables
         run: |
           echo "CWD - `pwd`"
