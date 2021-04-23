@@ -1,4 +1,8 @@
-# Localhost Screenshot
+[![localhost-screenshot](https://github.com/saschazar21/actions/actions/workflows/localhost-screenshot.yml/badge.svg)](https://github.com/saschazar21/actions/actions/workflows/localhost-screenshot.yml)
+
+<div align="center">
+  <h1><img alt="Icon showing a camera" href="https://raw.githubusercontent.com/feathericons/feather/0dc2bf5/icons/camera.svg" style="display: inline-block; padding: 0.25em; border-radius: 9999px; background-color: #74b5fd;" /><span>Localhost Screenshot</span></h1>
+</div>
 
 > A [GitHub Action](https://docs.github.com/en/actions) for creating automated screenshots of a static website for various viewports
 
@@ -40,6 +44,10 @@ with:
 
 The example configuration above will set `_build` as website root, create 3 screenshots from the website's `/about` page based on the viewport of the listed devices (requesting the website's dark mode, should it support automatic detection), and store the results in the directory set as `$HOME` environment variable (e.g. `/home/runner/work/_temp/_github_home` - see the [environment variables section](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables) in the GitHub docs).
 
+### Demo workflow
+
+A demo workflow is available in the [Actions tab](https://github.com/saschazar21/actions/actions/workflows/localhost-screenshot.yml/) of this repository.
+
 ## Debug messages
 
 Verbose logging output may be triggered by setting the `DEBUG` environment variable to `localhost-screenshot`:
@@ -49,3 +57,21 @@ uses: saschazar21/actions/packages/localhost-screenshot@main
 env:
   DEBUG: localhost-screenshot
 ```
+
+## Output files
+
+Screenshot output files can be found in the `/home/runner/work/_temp/_github_home/` directory for further processing (e.g. uploading artifacts, etc...), like the following example shows:
+
+```yml
+- name: Upload screenshots
+  uses: actions/upload-artifact@v2
+  with:
+    name: screenshots
+    path: /home/runner/work/_temp/_github_home/**.png
+```
+
+## License
+
+Licensed under the MIT license.
+
+Copyright ©️ 2021 [Sascha Zarhuber](https://sascha.work)
