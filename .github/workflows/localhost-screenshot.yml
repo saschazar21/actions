@@ -3,13 +3,28 @@ name: localhost-screenshot
 on: push
 
 jobs:
-  test:
+  changes:
     runs-on: ubuntu-latest
-
+    outputs:
+      changed: ${{ steps.filter.outputs.changed }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      - name: Check for changed files
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            changed:
+              - 'packages/localhost-screenshot/**'
+
+  test:
+    needs: changes
+    runs-on: ubuntu-latest
+    if: ${{ needs.changes.outputs.changed == 'true' }}
+
+    steps:
       - name: Print environment variables
         run: |
           echo "CWD - `pwd`"
