@@ -1,8 +1,12 @@
 FROM node:lts-alpine AS builder
 
+ENV NODE_ENV=production
+
 WORKDIR /src
 
-RUN npm i --save-dev debug yargs
+COPY package.json /src
+
+RUN yarn
 
 ### --------------------- ###
 
