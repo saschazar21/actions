@@ -2,26 +2,17 @@
   "name": "localhost-screenshot",
   "version": "0.0.0",
   "description": "Create screenshots from a static website",
+  "main": "src/index.js",
+  "repository": "https://github.com/saschazar21/actions",
   "author": "Sascha Zarhuber <saschazar21@yahoo.de> (https://sascha.work)",
   "license": "MIT",
-  "main": "src/index.js",
-  "directories": {
-    "src": "src",
-    "test": "__tests__"
-  },
-  "files": [
-    "src"
-  ],
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+  "private": false,
+  "dependencies": {
+    "puppeteer-core": "^15.5.0",
+    "serve-handler": "^6.1.3",
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
-    "node-fetch": "^2.6.1",
-    "puppeteer": "^8.0.0",
-    "serve": "^11.3.2"
-  },
-  "dependencies": {
-    "debug": "^4.3.1",
-    "yargs": "^16.2.0"
+    "got": "^11.0.0"
   }
 }

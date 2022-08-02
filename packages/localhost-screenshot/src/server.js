@@ -1,47 +1,30 @@
-const { spawn } = require('child_process');
-const { join } = require('path');
-// eslint-disable-next-line import/no-extraneous-dependencies
-const debug = require('debug')('localhost-screenshot');
+const http = require('http');
+const handler = require('serve-handler');
 
-const HOST_REGEX = /(http:\/\/localhost:\d{2,5})$/i;
-// eslint-disable-next-line prefer-destructuring
-const WORKDIR_PATH = process.env.GITHUB_WORKSPACE;
+const PORT = process.env.SERVER_PORT ?? 3000;
 
-const init = async ({ dist }) =>
+const DEFAULT_OPTIONS = {
+  renderSingle: true,
+  public: 'dist',
+};
+
+module.exports = async (customOptions) =>
   new Promise((resolve, reject) => {
-    let isReturned = false;
-    const serverRoot = join(WORKDIR_PATH, dist);
+    const options = {
+      ...DEFAULT_OPTIONS,
+      ...customOptions,
+      public: customOptions?.dist,
+    };
 
-    debug(`Serving files from: ${serverRoot}`);
+    const server = http.createServer((request, response) =>
+      handler(request, response, options),
+    );
 
-    const proc = spawn('serve', [serverRoot]);
+    server.on('error', reject);
 
-    proc.stdout.on('data', (data) => {
-      const d = data.toString().trim();
-      debug(d);
+    server.listen(PORT, () => {
+      console.log('Server running on port', PORT);
 
-      if (isReturned) {
-        return;
-      }
-
-      const [, host] = HOST_REGEX.test(d) ? HOST_REGEX.exec(d) : [];
-
-      isReturned = true;
-      resolve([proc, host]);
+      return resolve([server, `http://localhost:${PORT}`]);
     });
-
-    proc.stderr.on('data', (data) => {
-      debug(data.toString());
-
-      if (isReturned) {
-        return;
-      }
-
-      isReturned = true;
-      reject(data);
-    });
-
-    proc.on('exit', () => debug('Server exited.'));
   });
-
-module.exports = init;

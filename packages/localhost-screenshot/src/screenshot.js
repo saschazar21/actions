@@ -3,9 +3,16 @@ const { URL } = require('url');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const debug = require('debug')('localhost-screenshot');
 // eslint-disable-next-line import/no-extraneous-dependencies
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 const PUBLIC_PATH = process.env.HOME;
+const PUPPETEER_EXECUTABLE_PATH = process.env.PUPPETEER_EXECUTABLE_PATH;
+const PUPPETEER_PRODUCT = process.env.PUPPETEER_PRODUCT ?? 'chrome';
+
+if (!PUPPETEER_EXECUTABLE_PATH) {
+  throw new Error('PUPPETEER_EXECUTABLE_PATH is not set!');
+}
+
 // Puppeteer device descriptors: https://github.com/puppeteer/puppeteer/blob/main/src/common/DeviceDescriptors.ts
 const DEFAULT_VIEWPORT = [1440, 900];
 
@@ -22,6 +29,9 @@ const init = async () => {
       '--disable-dev-shm-usage',
     ],
     defaultViewport: { height, width },
+    headless: true,
+    executablePath: PUPPETEER_EXECUTABLE_PATH,
+    product: PUPPETEER_PRODUCT,
   });
 
   const version = `Browser version: ${await browser.version()}`;

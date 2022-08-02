@@ -8,6 +8,7 @@ const server = require('./server');
 const { argv } = yargs(hideBin(process.argv))
   .option('dark', {
     type: 'boolean',
+    default: false,
     description:
       'Apply dark mode (run with @media (prefers-color-scheme: dark))',
   })
@@ -42,6 +43,6 @@ const blank = String().padStart(fill.length, ' ');
 debug(`\n-${fill}-\n-${blank}-\n-   ${str}   -\n-${blank}-\n-${fill}-\n\n`);
 debug(options);
 
-server({ ...options }).then(([proc, baseUrl]) =>
-  screenshot({ ...options, baseUrl }).then(() => proc.kill()),
+server({ ...options }).then(([instance, baseUrl]) =>
+  screenshot({ ...options, baseUrl }).then(() => instance.close()),
 );
